@@ -1,0 +1,1 @@
+web: gunicorn energyuniport.wsgi --log-file -
