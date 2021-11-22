@@ -25,9 +25,9 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-r7i54rwag1z$y-0!w5g)yd+oob9&d2qhpufbi_0*7wmt&veor0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['energyuniport.herokuapp.com']
+ALLOWED_HOSTS = ['energyuniport.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+       
+    #Third party apps
+    'bootstrap4',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    # 可添加需要的第三方登录
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.weibo',
+
+    'password_reset',
+    'taggit',
+    'ckeditor',
+    'mptt',
+    'notifications',
+    
     'main',
+    'blog',
+    'userprofile',
+    'notice',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +159,131 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SMTP
+EMAIL_HOST = 'your smtp'
+
+EMAIL_HOST_USER = 'your email'
+
+EMAIL_HOST_PASSWORD = 'your password'
+
+EMAIL_PORT = 25
+
+EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = 'your email'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+CKEDITOR_CONFIGS = {
+    # django-ckeditor
+    'default': {
+        'width':'auto',
+        'height':'250px',
+        # tab
+        'tabSpaces': 4,
+
+        'toolbar': 'Custom',
+
+        'toolbar_Custom': [
+
+            ['Smiley', 'CodeSnippet'], 
+
+            ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
+
+            ['TextColor', 'BGColor'],
+
+            ['Link', 'Unlink'],
+
+            ['NumberedList', 'BulletedList'],
+
+            ['Maximize']
+        ],
+
+        'extraPlugins': ','.join(['codesnippet', 'prism', 'widget', 'lineutils']),
+    }
+}
+
+AUTHENTICATION_BACKENDS = (
+    # Django  allauth 
+    'django.contrib.auth.backends.ModelBackend',
+    # allauth  email 
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+
+# LOGGING = {
+#     'version': 1,
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#         },
+#     },
+# }
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'filters': {
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple'
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#             'formatter': 'verbose',
+#         },
+#         'file': {
+#             'level': 'WARNING',
+#             # 'class': 'logging.FileHandler',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'when': 'midnight',
+#             'backupCount': 30,
+#             'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['file', 'mail_admins'],
+#             'level': 'WARNING',
+#             'propagate': False,
+#         },
+#     }
+# }

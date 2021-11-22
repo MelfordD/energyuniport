@@ -1,85 +1,59 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
-
-    <title>Student Energy At University of Portharcourt</title>
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/fullpage.min.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-
-    </head>
-    
-    <body>
-    
-    <div id="video">
-        <div class="preloader">
-            <div class="preloader-bounce">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-
-        <header id="header">
-            <div class="container-fluid">
-                <div class="navbar">
-                    <a href="#" id="logo" title="Student Energy At University of Portharcourt" class="selogo">
-                        Student <span>Energy</span><br><h6>At University of Portharcourt</h6>
-                    </a>
-                    <div class="navigation-row">
-                        <nav id="navigation">
-                            <button type="button" class="navbar-toggle"> <i class="fa fa-bars"></i> </button>
-                            <div class="nav-box navbar-collapse">
-                                <ul class="navigation-menu nav navbar-nav navbars" id="nav">
-                                    <li data-menuanchor="slide01" class="active"><a href="#slide01">Home</a></li>
-                                    <li data-menuanchor="slide02"><a href="#slide02">About Us</a></li>
-                                    <li data-menuanchor="slide03"><a href="#slide03">What We Do</a></li>
-                                    <li data-menuanchor="slide04"><a href="#slide04">Our Team</a></li>
-                                    <li data-menuanchor="slide05"><a href="#slide05">Our Blog</a></li>
-                                    <li data-menuanchor="slide06"><a href="#slide06">Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <video autoplay muted loop id="myVideo">
-          <source src="{% static 'images/video-bg.mp4' %}" type="video/mp4">
-        </video>
-
-        <div id="fullpage" class="fullpage-default">
+{% block active %} active {% endblock %}
+{% block activee %} active {% endblock %}
+{% block content %}
+ <div id="fullpage" class="fullpage-default">
 
             <div class="section animated-row" data-section="slide01">
                 <div class="section-inner">
                     <div class="welcome-box">
-                        <span class="welcome-first animate" data-animate="fadeInUp">Hello, welcome to</span>
+						{% if user.is_authenticated %}
+							<span class="welcome-first animate" data-animate="fadeInUp">
+								Hello,
+								<span>
+									{{ user.username }}
+								<!--
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											{% if unread_count %}
+												<svg viewBox="0 0 8 8"
+													 width="8px"
+													 height="8px">
+													<circle cx="4"
+															cy="4"
+															r="4"
+															fill="#ff6b6b"
+													></circle>
+												</svg>
+											{% endif %}
+											{{ user.username }}
+										</a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+											<a class="dropdown-item" href="{% url 'notice:list' %}">Notice
+												{% if unread_count %}
+													<span class="badge badge-danger">{{ unread_count }}</span>
+												{% endif %}
+											</a>
+											<a class="dropdown-item" href="{% url 'article:article_create' %}">Create Post</a>
+											<a class="dropdown-item" href='{% url "userprofile:edit" user.id %}'>Edit</a>
+											<a class="dropdown-item" href="#" onclick="user_delete()">Delete Account</a>
+											<a class="dropdown-item" href='{% url "userprofile:logout" %}'>Logout</a>
+										</div>
+									</li>
+								-->
+								</span>
+							<span> Welcome to</span>
+						{% else %}
+							<span class="welcome-first animate" data-animate="fadeInUp">
+								Please <u><span><a href="{% url 'account_login' %}" style="color:blue;"> Login </a></span></u> to
+							</span>
+						{% endif %}
                         <h1 class="welcome-title animate" data-animate="fadeInUp">Student <a>Energy</a></h1>
 						<h4 class="animate" data-animate="fadeInUp">At University of Portharcourt</h4>
-                        <p class="animate" data-animate="fadeInUp">This is a student organisation(under the motherbody <b>Student Energy</b>) focused on bringing together youths in Port Harcourt and south-south Nigeria to educate them on energy, it's potentiality and sustainability.</p>
+                        <p class="animate" data-animate="fadeInUp">"Student Energy at University of Port Harcourt is proud to be oar of Student Energy's Global Network. Together we are working to educate, inspire, and unite young energy leaders committed to fueling a sustainable energy future"</p>
 						<!-- <div class="btn">Read More</div>-->
-                        <div class="scroll-down next-section animate data-animate="fadeInUp""><img src="{% static 'images/mouse-scroll.png' %}" alt=""><span>Scroll Down</span></div>
+                        </br></br></br><div class="scroll-down next-section animate data-animate="fadeInUp"><img src="{% static 'images/mouse-scroll.png' %}" alt=""><span>Scroll Down</span></div>
                     </div>
                 </div>
             </div>
@@ -138,18 +112,19 @@
                             </div>
                             <div class="services-section">
                                 <div class="services-list owl-carousel">
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="service-box">
-                                            <span class="service-icon"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
-                                            <h3>Our Mission</h3>
-                                            <p>Student Energy at University of Port Harcourt is aimed at educating and creating awareness on the importance of inter-disciplinary actions towards the alleviation of our dependency on crude-oil through the acquisition of knowledge of other energy sources, technical skills, policy restructuring and leadership responsibilities that will create a better world for us in the nearest future.</p>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="item animate" data-animate="fadeInUp">
                                         <div class="service-box">
                                             <span class="service-icon"><i class="fa fa-cloud" aria-hidden="true"></i></span>
                                             <h3>Our Vision</h3>
                                             <p>To see youths lead the way to a sustainable and more equitable energy future. </p>
+                                        </div>
+                                    </div>
+									<div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box">
+                                            <span class="service-icon"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                                            <h3>Our Mission</h3>
+                                            <p>Student Energy at University of Port Harcourt is aimed at educating and creating awareness on the importance of inter-disciplinary actions towards the alleviation of our dependency on crude-oil through the acquisition of knowledge of other energy sources, technical skills, policy restructuring and leadership responsibilities that will create a better world for us in the nearest future.</p>
                                         </div>
                                     </div>
                                     <div class="item animate" data-animate="fadeInUp">
@@ -243,7 +218,7 @@
                     </div>
                 </div>
             </div>
-
+		
             <div class="section animated-row" data-section="slide06">
                 <div class="section-inner">
                     <div class="row justify-content-center">
@@ -252,6 +227,7 @@
                                 <span>BLOG</span>
                                 <h2>What students say?</h2>
                             </div>
+						{% for article in articles %}
                             <div class="col-md-8 offset-md-2">
                                 <div class="testimonials-section">
                                     <div class="testimonials-slider owl-carousel">
@@ -262,7 +238,7 @@
                                                 </div>
                                                 <div class="testimonial-content">
                                                     <h4>Sandar</h4>
-                                                    <p>"Ut varius leo eu mauris lacinia, eleifend posuere urna gravida. Aenean a mattis lacus."</p>
+                                                    <p>{{ article.body|slice:'100' }}... </p>
                                                     <span>Chemical Engineering</span>
                                                 </div>                                           
                                             </div>
@@ -270,10 +246,12 @@
                                     </div>
                                 </div>
                             </div>
+						{% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
+		
 
             <div class="section animated-row" data-section="slide06">
                 <div class="section-inner">
@@ -320,35 +298,5 @@
                 </div>
             </div>
         </div>
-
-        <div id="social-icons">
-            <div class="text-right">
-                <ul class="social-icons">
-                    <li><a href="https://www.facebook.com/studentenergy/" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="https://twitter.com/EnergyUniport?s=20" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="mailto: portharcourt@studentenergy" title="Mail"><i class="fa fa-envelope"></i></a></li>
-                    <li><a href="https://instagram.com/energyuniport?utm_medium=copy_link" title="Instagram"><i class="fa fa-instagram"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>  
-
-    <script src="{% static 'js/jquery.js' %}"></script>
-
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    <script src="{% static 'js/fullpage.min.js' %}"></script>
-
-    <script src="{% static 'js/scrolloverflow.js' %}"></script>
-
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-
-    <script src="{% static 'js/jquery.inview.min.js' %}"></script>
-
-    <script src="{% static 'js/form.js' %}"></script>
-
-    <script src="{% static 'js/custom.js' %}"></script>
-
-
-  </body>
-</html>
+		
+{% endblock %}

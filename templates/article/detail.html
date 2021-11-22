@@ -1,0 +1,224 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+<script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'prism/prism.css' %}">
+
+<div id="fullpage" class="fullpage-default">
+
+	<div class="section animated-row" >
+		<div class="section-inner">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wide-col-laptop">
+					<div class="title-block animate" data-animate="fadeInUp">
+						<span></span>
+						<h2>{{ article.title }}</h2>
+						<p>
+							<i class="fa fa-eye" style="color: lightskyblue;"></i>
+							{{ article.total_views }} views&nbsp;&nbsp;&nbsp;
+							<span>
+								<i class="fa fa-user" style="color: lightskyblue;"></i>
+								Author: {{ article.author }}&nbsp;&nbsp;&nbsp;
+						</p>
+						{% if user == article.author %}
+
+							<!-- · <a href="#" onclick="confirm_delete()">删除文章</a> -->
+							· <a href="{% url 'article:article_delete' article.id %}" onclick="confirm_safe_delete()">Delete</a>
+							<form 
+								style="display:none;" 
+								id="safe_delete"
+								action="{% url 'article:article_safe_delete' article.id %}" 
+								method="POST"
+							>
+							{% csrf_token %}
+								<button type="submit">Submit</button>
+							</form>
+
+							· <a href="{% url 'article:article_update' article.id %}">
+								Update
+							</a>
+						{% endif %}
+					</div>
+					<div class="item animate" data-animate="fadeInUp">
+						<div class="service-box">
+							<div class="portfolio-item">
+								<div class="thumb">
+									<img src="{{ article.avatar.url }}" 
+										alt="avatar" 
+										style="max-width:100%; border-radius: 20px"
+									>
+								</div>
+							</div>
+							<h3>{{ article.title }}</h3>
+							<p>{{ article.body|safe }}. </p>
+							
+							<div style="text-align:center;" class="mt-4">
+								<button class="btn btn-outline-danger" type="button" onclick="validate_is_like( '{% url 'article:increase_likes' article.id %}', {{ article.id }}, {{ article.likes }})">
+									<span>Like</span>
+									<span>
+										<i class="fa fa-heart"></i>
+									</span>
+									<span id="likes_number">
+										{{ article.likes }}
+									</span>
+								</button>
+							</div>
+							
+							<br>
+							<div class="row justify-content-end">
+								{% if next_article %}
+									<div class="col-auto mr-auto">
+										<a  href="{{ next_article.get_absolute_url }}" 
+											class="btn btn-info"
+											>
+											{{ next_article.title }}
+										</a>
+									</div>
+								{% endif %}
+								{% if pre_article %}
+									<div class="col-auto">
+										<a  href="{{ pre_article.get_absolute_url }}" 
+										class="btn btn-primary btn-info" 
+										>
+											{{ pre_article.title }}
+										</a>
+									</div>
+								{% endif %}
+							</div>
+							
+							<hr>
+							{% if user.is_authenticated %}
+								<div>
+									<form 
+										action="{% url 'comment:post_comment' article.id %}" 
+										method="POST"
+									>
+									{% csrf_token %}
+										<div class="form-group">
+											<label for="body">
+												<strong>
+													Comments：
+												</strong>
+											</label>
+											<div>
+												{{ comment_form.media }}
+												{{ comment_form.body }}
+											</div>
+										</div>
+										<!-- 提交按钮 -->
+										<button type="submit" class="btn btn-primary ">Submit</button>
+									</form>
+								</div>
+								<br>
+							{% else %}
+								<br>
+								<h5 class="row justify-content-center">
+									<a href="{% url 'account_login' %}">login here  </a> to comment
+								</h5>
+								<br>
+							{% endif %}
+							
+								{% load mptt_tags %}
+								<i class="fa fa-comments" style="color: yellowgreen;"></i>
+								<h4>{{ comments.count }} comments</h4>
+								<div class="row">
+									{% recursetree comments %}
+										{% with comment=node %}
+											<div class="{% if comment.reply_to %}
+														offset-1 col-11
+														{% else %}
+														col-12
+														{% endif %}"
+												id="comment_elem_{{ comment.id }}" 
+											>
+												<hr>
+												<p>
+													<strong style="color: pink">
+														{{ comment.user }}
+													</strong> 
+
+													{% if comment.reply_to %}
+														<i class="far fa-arrow-alt-circle-right" 
+														   style="color: cornflowerblue;"
+														></i>
+														<strong style="color: pink">
+															{{ comment.reply_to }}
+														</strong> 
+													{% endif %}
+
+												</p>
+												<div>{{ comment.body|safe }}</div>
+
+												<div>
+													<span style="color: gray">
+														{{ comment.created|date:"Y-m-d H:i" }}
+													</span>
+
+													{% if user.is_authenticated %}
+														<button type="button" 
+																class="btn btn-light btn-sm text-muted" 
+																onclick="load_modal({{ article.id }}, {{ comment.id }})"
+														>
+															回复
+														</button>
+													{% else %}
+														<a class="btn btn-light btn-sm text-muted" 
+															href="{% url 'account_login' %}"
+														>
+															login here
+														</a>
+													{% endif %}
+												</div>
+
+												<!-- Modal -->
+												<div class="modal fade" 
+													 id="comment_{{ comment.id }}" 
+													 tabindex="-1" 
+													 role="dialog" 
+													 aria-labelledby="CommentModalCenter" 
+													 aria-hidden="true"
+												>
+													<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+														<div class="modal-content" style="height: 480px">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalCenterTitle">回复 {{ comment.user }}：</h5>
+															</div>
+															<div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+														</div>
+													</div>
+												</div>
+
+												{% if not comment.is_leaf_node %}
+													<div class="children">
+														{{ children }}
+													</div>
+												{% endif %}
+											</div>
+											
+										{% endwith %}
+									{% endrecursetree %}
+								</div>
+							</div>
+							<div class="col-3 mt-4" id="sidebar" class="sidebar">
+								<div class="sidebar__inner">
+									<h4><strong>Reply</strong></h4>
+									<hr>
+									<div>
+										{{ toc|safe }}
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+				
+</div>				
+{% endblock %}

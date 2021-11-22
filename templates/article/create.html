@@ -1,0 +1,71 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block content %}
+<div id="fullpage" class="fullpage-default">
+	<div class="section animated-row" data-section="slide01">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<br>
+					<form method="post" action="." enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="avatar">Post Image</label>
+							<input type="file" class="form-control-file" name="avatar" id="avatar">
+						</div>
+						<div class="form-group">
+							<!-- 标签 -->
+							<label for="title">Post Title</label>
+							<input type="text" 
+								   class="form-control" 
+								   id="title" 
+								   name="title"
+							>
+						</div>
+						
+						<!-- 文章栏目 -->
+						<div class="form-group">
+							<label for="column">Column</label>
+							<select class="form-control col-3" 
+									id="column" 
+									name="column"
+							>
+								{% for column in columns %}
+									<option value="{{ column.id }}">{{ column }}</option>
+								{% endfor %}
+							</select>
+						</div>
+
+						<!-- 文章标签 -->
+						<div class="form-group">
+							<!-- 标签 -->
+							<label for="tags">Tag</label>
+							<!-- 文本框 -->
+							<input type="text" 
+								   class="form-control col-3" 
+								   id="tags" 
+								   name="tags"
+							>
+						</div>
+
+						<!-- 文章正文 -->
+						<div class="form-group">
+							<label for="body">Body</label>
+							<!-- 文本区域 -->
+							<textarea type="text" 
+									  class="form-control" 
+									  id="body" 
+									  name="body" 
+									  rows="12"
+							></textarea>
+						</div>
+						<!-- 提交按钮 -->
+						<button type="submit" class="btn btn-primary">Create Post</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

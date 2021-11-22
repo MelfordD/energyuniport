@@ -15,8 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from blog.views import article_list, index
+from django.urls import path, include
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+import notifications.urls
+
+from blog.views import article_list, index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),
+    path('', index, name='index'),
+    path('comments', include('main.urls', namespace='comment')),
+    path('notice/', include('notice.urls', namespace='notice')),
+    path('userprofile/', include('userprofile.urls', namespace='userprofile')),
+    path('password-reset/', include('password_reset.urls')),
+    path('article/', include('blog.urls', namespace='article')),
+    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    path('accounts/', include('allauth.urls')),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
