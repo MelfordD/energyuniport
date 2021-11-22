@@ -874,3 +874,14 @@ textarea.form-control {
   background-color: #fff;
   border-radius: 3px;
 }
+
+/*==============================================
+11. CUSTOM CSS
+================================================*/
+
+.bcolumn {
+	float: right;
+}
+.ccolumn {
+	float: left;
+}
