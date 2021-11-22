@@ -1,13 +1,12 @@
 asgiref
-Django
 gunicorn
-pytz
 sqlparse
 whitenoise
 certifi
 chardet
 defusedxml
 Django
+django-heroku
 django-allauth
 django-ckeditor
 django-js-asset
