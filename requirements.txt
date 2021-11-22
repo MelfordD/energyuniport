@@ -16,6 +16,7 @@ django-mptt
 django-notifications-hq
 django-password-reset
 django-taggit
+django_project
 idna
 jsonfield
 Markdown
