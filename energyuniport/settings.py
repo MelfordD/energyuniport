@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-r7i54rwag1z$y-0!w5g)yd+oob9&d2qhpufbi_0*7wmt&veor0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['energyuniport.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     
-    # 可添加需要的第三方登录
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.weibo',
 
@@ -72,9 +71,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'energyuniport.urls'
+
+WHITENOISE_SKIP_COMPRESS_EXTENSIONS = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
@@ -138,24 +140,25 @@ USE_L10N = True
 
 USE_TZ = True
 
-SECURE_SSL_REDIRECT = True
+#SECURE_SSL_REDIRECT = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+'''
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
+'''
 STATIC_ROOT = os.path.join(BASE_PATH, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_PATH, 'static'),
 )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
