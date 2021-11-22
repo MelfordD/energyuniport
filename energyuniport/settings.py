@@ -76,7 +76,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'energyuniport.urls'
 
-WHITENOISE_SKIP_COMPRESS_EXTENSIONS = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#WHITENOISE_SKIP_COMPRESS_EXTENSIONS = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
