@@ -1,1 +1,1 @@
-web: gunicorn energyuniport.wsgi
+web: gunicorn energyuniport.wsgi --log-file -

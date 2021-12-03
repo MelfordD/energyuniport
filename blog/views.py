@@ -1,9 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-
-
-    
+  
 
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -65,7 +63,7 @@ def article_list(request):
         article_list = article_list.order_by('-total_views')
 
 
-    paginator = Paginator(article_list, 3)
+    paginator = Paginator(article_list, 12)
 
     page = request.GET.get('page')
 

@@ -5,298 +5,301 @@
 {% block content %}
  <div id="fullpage" class="fullpage-default">
 
-            <div class="section animated-row" data-section="slide01">
-                <div class="section-inner">
-                    <div class="welcome-box">
-						{% if user.is_authenticated %}
-							<span class="welcome-first animate" data-animate="fadeInUp">
-								Hello,
-								<span>
+	<div class="section animated-row" data-section="slide01">
+		<div class="section-inner">
+			<div class="welcome-box">
+				{% if user.is_authenticated %}
+					<span class="welcome-first animate" data-animate="fadeInUp">
+						Hello,
+						<span>
+							{{ user.username }}
+						<!--
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{% if unread_count %}
+										<svg viewBox="0 0 8 8"
+											 width="8px"
+											 height="8px">
+											<circle cx="4"
+													cy="4"
+													r="4"
+													fill="#ff6b6b"
+											></circle>
+										</svg>
+									{% endif %}
 									{{ user.username }}
-								<!--
-									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											{% if unread_count %}
-												<svg viewBox="0 0 8 8"
-													 width="8px"
-													 height="8px">
-													<circle cx="4"
-															cy="4"
-															r="4"
-															fill="#ff6b6b"
-													></circle>
-												</svg>
-											{% endif %}
-											{{ user.username }}
-										</a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item" href="{% url 'notice:list' %}">Notice
-												{% if unread_count %}
-													<span class="badge badge-danger">{{ unread_count }}</span>
-												{% endif %}
-											</a>
-											<a class="dropdown-item" href="{% url 'article:article_create' %}">Create Post</a>
-											<a class="dropdown-item" href='{% url "userprofile:edit" user.id %}'>Edit</a>
-											<a class="dropdown-item" href="#" onclick="user_delete()">Delete Account</a>
-											<a class="dropdown-item" href='{% url "userprofile:logout" %}'>Logout</a>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="{% url 'notice:list' %}">Notice
+										{% if unread_count %}
+											<span class="badge badge-danger">{{ unread_count }}</span>
+										{% endif %}
+									</a>
+									<a class="dropdown-item" href="{% url 'article:article_create' %}">Create Post</a>
+									<a class="dropdown-item" href='{% url "userprofile:edit" user.id %}'>Edit</a>
+									<a class="dropdown-item" href="#" onclick="user_delete()">Delete Account</a>
+									<a class="dropdown-item" href='{% url "userprofile:logout" %}'>Logout</a>
+								</div>
+							</li>
+						-->
+						</span>
+					<span> Welcome to</span>
+				{% else %}
+					<span class="welcome-first animate" data-animate="fadeInUp">
+						Please <u><span><a href="{% url 'account_login' %}" style="color:blue;"> Login </a></span></u> to
+					</span>
+				{% endif %}
+				<h1 class="welcome-title animate" data-animate="fadeInUp">Student <a>Energy</a></h1>
+				<h4 class="animate" data-animate="fadeInUp">At University of Portharcourt</h4>
+				<p class="animate" data-animate="fadeInUp">"Student Energy at University of Port Harcourt is proud to be oar of Student Energy's Global Network. Together we are working to educate, inspire, and unite young energy leaders committed to fueling a sustainable energy future"</p>
+				<!-- <div class="btn">Read More</div>-->
+				</br></br></br><div class="scroll-down next-section animate data-animate="fadeInUp"><img src="{% static 'images/mouse-scroll.png' %}" alt=""><span>Scroll Down</span></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section animated-row" data-section="slide02">
+		<div class="section-inner">
+			<div class="about-section">
+				<div class="row justify-content-center">
+					<div class="col-lg-8 wide-col-laptop">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="about-contentbox">
+									<div class="animate" data-animate="fadeInUp">
+										<span>About Us</span>
+										<h2>Student Energy Uniport</h2>
+										<p>Student Energy exists to empower and develop the change agents who will accelerate our transition to a sustainable energy future and create the space they need within industry, government, and civil society to make that change a reality..</p>
+									</div>
+									<div class="facts-list owl-carousel">
+										<div class="item animate" data-animate="fadeInUp">
+											<div class="counter-box">
+												<i class="fa fa-desktop counter-icon" aria-hidden="true"></i><span class="count-number">3</span> Working Year
+											</div>
 										</div>
-									</li>
-								-->
-								</span>
-							<span> Welcome to</span>
-						{% else %}
-							<span class="welcome-first animate" data-animate="fadeInUp">
-								Please <u><span><a href="{% url 'account_login' %}" style="color:blue;"> Login </a></span></u> to
-							</span>
-						{% endif %}
-                        <h1 class="welcome-title animate" data-animate="fadeInUp">Student <a>Energy</a></h1>
-						<h4 class="animate" data-animate="fadeInUp">At University of Portharcourt</h4>
-                        <p class="animate" data-animate="fadeInUp">"Student Energy at University of Port Harcourt is proud to be oar of Student Energy's Global Network. Together we are working to educate, inspire, and unite young energy leaders committed to fueling a sustainable energy future"</p>
-						<!-- <div class="btn">Read More</div>-->
-                        </br></br></br><div class="scroll-down next-section animate data-animate="fadeInUp"><img src="{% static 'images/mouse-scroll.png' %}" alt=""><span>Scroll Down</span></div>
-                    </div>
-                </div>
-            </div>
+																						<div class="item animate" data-animate="fadeInUp">
+											<div class="counter-box">
+												
+												<i class="fa fa-user counter-icon" aria-hidden="true"></i></br>over</br><span class="count-number">100+</span> Members
+											</div>
+										</div>
 
-            <div class="section animated-row" data-section="slide02">
-                <div class="section-inner">
-                    <div class="about-section">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8 wide-col-laptop">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="about-contentbox">
-                                            <div class="animate" data-animate="fadeInUp">
-                                                <span>About Us</span>
-                                                <h2>Student Energy Uniport</h2>
-                                                <p>Student Energy exists to empower and develop the change agents who will accelerate our transition to a sustainable energy future and create the space they need within industry, government, and civil society to make that change a reality..</p>
-                                            </div>
-                                            <div class="facts-list owl-carousel">
-                                                <div class="item animate" data-animate="fadeInUp">
-                                                    <div class="counter-box">
-                                                        <i class="fa fa-desktop counter-icon" aria-hidden="true"></i><span class="count-number">3</span> Working Year
-                                                    </div>
-                                                </div>
-												                                                <div class="item animate" data-animate="fadeInUp">
-                                                    <div class="counter-box">
-														
-                                                        <i class="fa fa-user counter-icon" aria-hidden="true"></i></br>over</br><span class="count-number">100+</span> Members
-                                                    </div>
-                                                </div>
+										<div class="item animate" data-animate="fadeInUp">
+											<div class="counter-box">
+												<i class="fa fa-support counter-icon" aria-hidden="true"></i><span class="count-number">6</span> Team Members
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<figure class="about-img animate" data-animate="fadeInUp"><img src="{% static 'images/imgg.jpg' %}" class="rounded" alt=""></figure>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                                                <div class="item animate" data-animate="fadeInUp">
-                                                    <div class="counter-box">
-                                                        <i class="fa fa-support counter-icon" aria-hidden="true"></i><span class="count-number">6</span> Team Members
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <figure class="about-img animate" data-animate="fadeInUp"><img src="{% static 'images/imgg.jpg' %}" class="rounded" alt=""></figure>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+	<div class="section animated-row" data-section="slide03">
+		<div class="section-inner">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wide-col-laptop">
+					<div class="title-block animate" data-animate="fadeInUp">
+						<span></span>
+						<h2>What We Do?</h2>
+					</div>
+					<div class="services-section">
+						<div class="services-list owl-carousel">
+							
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="service-box">
+									<span class="service-icon"><i class="fa fa-cloud" aria-hidden="true"></i></span>
+									<h3>Our Vision</h3>
+									<p>To see youths lead the way to a sustainable and more equitable energy future. </p>
+								</div>
+							</div>
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="service-box">
+									<span class="service-icon"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
+									<h3>Our Mission</h3>
+									<p>Student Energy at University of Port Harcourt is aimed at educating and creating awareness on the importance of inter-disciplinary actions towards the alleviation of our dependency on crude-oil through the acquisition of knowledge of other energy sources, technical skills, policy restructuring and leadership responsibilities that will create a better world for us in the nearest future.</p>
+								</div>
+							</div>
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="service-box">
+									<span class="service-icon"><i class="fa fa-desktop" aria-hidden="true"></i></span>
+									<h3>Our Core Values</h3>
+									<p>Diversity of viewpoints</br>
+										All-encompassing exchange of ideas</br>
+										Hands-on projects</br>
+										Research and community outreach
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-            <div class="section animated-row" data-section="slide03">
-                <div class="section-inner">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 wide-col-laptop">
-                            <div class="title-block animate" data-animate="fadeInUp">
-                                <span></span>
-                                <h2>What We Do?</h2>
-                            </div>
-                            <div class="services-section">
-                                <div class="services-list owl-carousel">
-                                    
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="service-box">
-                                            <span class="service-icon"><i class="fa fa-cloud" aria-hidden="true"></i></span>
-                                            <h3>Our Vision</h3>
-                                            <p>To see youths lead the way to a sustainable and more equitable energy future. </p>
-                                        </div>
-                                    </div>
-									<div class="item animate" data-animate="fadeInUp">
-                                        <div class="service-box">
-                                            <span class="service-icon"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
-                                            <h3>Our Mission</h3>
-                                            <p>Student Energy at University of Port Harcourt is aimed at educating and creating awareness on the importance of inter-disciplinary actions towards the alleviation of our dependency on crude-oil through the acquisition of knowledge of other energy sources, technical skills, policy restructuring and leadership responsibilities that will create a better world for us in the nearest future.</p>
-                                        </div>
-                                    </div>
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="service-box">
-                                            <span class="service-icon"><i class="fa fa-desktop" aria-hidden="true"></i></span>
-                                            <h3>Our Core Values</h3>
-                                            <p>Diversity of viewpoints</br>
-												All-encompassing exchange of ideas</br>
-												Hands-on projects</br>
-												Research and community outreach
- </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+	
 
-            
+	<div class="section animated-row" data-section="slide04">
+		<div class="section-inner">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wide-col-laptop">
+					<div class="title-block animate" data-animate="fadeInUp">
+						<span>TEAM</span>
+						<h2>Our Executives</h2>
+					</div>
+					<div class="gallery-section">
+						<div class="gallery-list owl-carousel">
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="portfolio-item">
+									<div class="thumb">
+										<img src="{% static 'images/p1.jpeg' %}" alt="">
+									</div>
+									<div class="thumb-inner animate" data-animate="fadeInUp">
+										<h4>President</h4>
+										<p>Honest Orji</p>
+									</div>
+								</div>
+							</div>
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="portfolio-item">
+									<div class="thumb">
+										<img src="{% static 'images/p5.jpg' %}" alt="">
+									</div>
+									<div class="thumb-inner animate" data-animate="fadeInUp">
+										<h4>Vice President</h4>
+										<p>Naasi Torka</p>
+									</div>
+								</div>
+							</div>
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="portfolio-item">
+									<div class="thumb">
+										<img src="{% static 'images/p4jpg' %}" alt="">
+									</div>
+									<div class="thumb-inner animate" data-animate="fadeInUp">
+										<h4>VP Finance/Sponsorship</h4>
+										<p>Osoh Millicent Obusor</p>
+									</div>
+								</div>
+							</div>
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="portfolio-item">
+									<div class="thumb">
+										<img src="{% static 'images/p2.jpeg' %}" alt="">
+									</div>
+									<div class="thumb-inner animate" data-animate="fadeInUp">
+										<h4>VP Tech</h4>
+										<p>Melford Dike</p>
+									</div>
+								</div>
+							</div>
+							<div class="item animate" data-animate="fadeInUp">
+								<div class="portfolio-item">
+									<div class="thumb">
+										<img src="{% static 'images/p3.jpg' %}" alt="">
+									</div>
+									<div class="thumb-inner animate" data-animate="fadeInUp">
+										<h4>VP Communication</h4>
+										<p>Victor </p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-            <div class="section animated-row" data-section="slide04">
-                <div class="section-inner">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 wide-col-laptop">
-                            <div class="title-block animate" data-animate="fadeInUp">
-                                <span>TEAM</span>
-                                <h2>Our Executives</h2>
-                            </div>
-                            <div class="gallery-section">
-                                <div class="gallery-list owl-carousel">
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="portfolio-item">
-                                            <div class="thumb">
-                                                <img src="{% static 'images/item-1.jpg' %}" alt="">
-                                            </div>
-                                            <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>President</h4>
-                                                <p>Honest Orji</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="portfolio-item">
-                                            <div class="thumb">
-                                                <img src="{% static 'images/item-2.jpg' %}" alt="">
-                                            </div>
-                                            <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>VP Finance</h4>
-                                                <p>Please tell your friends about it. Templatemo is the best website to download free Bootstrap themes.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="portfolio-item">
-                                            <div class="thumb">
-                                                <img src="{% static 'images/item-3.jpg' %}" alt="">
-                                            </div>
-                                            <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>VP Tech</h4>
-                                                <p>Melford Dike</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="portfolio-item">
-                                            <div class="thumb">
-                                                <img src="{% static 'images/item-1.jpg' %}" alt="">
-                                            </div>
-                                            <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>VP Communication</h4>
-                                                <p>Please tell your friends about it. Templatemo is the best website to download free Bootstrap templates.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item animate" data-animate="fadeInUp">
-                                        <div class="portfolio-item">
-                                            <div class="thumb">
-                                                <img src="{% static 'images/item-2.jpg' %}" alt="">
-                                            </div>
-                                            <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>VP </h4>
-                                                <p>Please tell your friends about it. Templatemo is the best website to download Bootstrap CSS templates.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+	<div class="section animated-row" data-section="slide06">
+		<div class="section-inner">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wide-col-laptop">
+					<div class="title-block animate" data-animate="fadeInUp">
+						<span>BLOG</span>
+						<h2>What students say?</h2>
+					</div>
+				{% for article in articles %}
+					<div class="col-md-8 offset-md-2">
+						<div class="testimonials-section">
+							<div class="testimonials-slider owl-carousel">
+								<div class="item animate" data-animate="fadeInUp">
+									<div class="testimonial-item">
+										<div class="client-row">
+											<img src="{% static 'images/profile-01.jpg' %}" class="rounded-circle" alt="profile 1">
+										</div>
+										<div class="testimonial-content">
+											<h4>Sandar</h4>
+											<p>{{ article.body|slice:'100' }}... </p>
+											<span>Chemical Engineering</span>
+										</div>                                           
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="section animated-row" data-section="slide06">
+		<div class="section-inner">
+			<div class="row justify-content-center">
+				<div class="col-md-7 wide-col-laptop">
+					<div class="title-block animate" data-animate="fadeInUp">
+						<span>Contact</span>
+						<h2>Get In Touch!</h2>
+					</div>
+					<div class="contact-section">
+						<div class="row">
+							<div class="col-md-6 animate" data-animate="fadeInUp">
+								<div class="contact-box">
+									<div class="contact-row">
+										<i class="fa fa-map-marker"></i> University of Portharcort, </br>Choba Port Harcourt.
+									</div>
+									<div class="contact-row">
+										<i class="fa fa-phone"></i> 090 080 0210
+									</div>
+									<div class="contact-row">
+										<i class="fa fa-envelope"></i> portharcourt@studentenergy.org
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 animate" data-animate="fadeInUp">
+								<form id="ajax-contact" method="post" action="#">
+									<div class="input-field">
+										<input type="text" class="form-control" name="name" id="name" required placeholder="Name">
+									</div>
+									<div class="input-field">
+										<input type="email" class="form-control" name="email" id="email" required placeholder="Email">
+									</div>
+									<div class="input-field">
+										<textarea class="form-control" name="message" id="message" required placeholder="Message"></textarea>
+									</div>
+									<button class="btn" type="submit">Submit</button>
+								</form>
+								<div id="form-messages" class="mt-3"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
-            <div class="section animated-row" data-section="slide06">
-                <div class="section-inner">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 wide-col-laptop">
-                            <div class="title-block animate" data-animate="fadeInUp">
-                                <span>BLOG</span>
-                                <h2>What students say?</h2>
-                            </div>
-						{% for article in articles %}
-                            <div class="col-md-8 offset-md-2">
-                                <div class="testimonials-section">
-                                    <div class="testimonials-slider owl-carousel">
-                                        <div class="item animate" data-animate="fadeInUp">
-                                            <div class="testimonial-item">
-                                                <div class="client-row">
-                                                    <img src="{% static 'images/profile-01.jpg' %}" class="rounded-circle" alt="profile 1">
-                                                </div>
-                                                <div class="testimonial-content">
-                                                    <h4>Sandar</h4>
-                                                    <p>{{ article.body|slice:'100' }}... </p>
-                                                    <span>Chemical Engineering</span>
-                                                </div>                                           
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-						{% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-		
+	</div>
+	<p>Copyrights © <script>document.write(new Date().getFullYear());</script> Designed and Developed by <a href="https://instagram.com/mels_inc?utm_medium=copy_link">Mel's_inc</a></p>
+</div>
 
-            <div class="section animated-row" data-section="slide06">
-                <div class="section-inner">
-                    <div class="row justify-content-center">
-                        <div class="col-md-7 wide-col-laptop">
-                            <div class="title-block animate" data-animate="fadeInUp">
-                                <span>Contact</span>
-                                <h2>Get In Touch!</h2>
-                            </div>
-                            <div class="contact-section">
-                                <div class="row">
-                                    <div class="col-md-6 animate" data-animate="fadeInUp">
-                                        <div class="contact-box">
-                                            <div class="contact-row">
-                                                <i class="fa fa-map-marker"></i> University of Portharcort, </br>Choba Port Harcourt.
-                                            </div>
-                                            <div class="contact-row">
-                                                <i class="fa fa-phone"></i> 090 080 0210
-                                            </div>
-                                            <div class="contact-row">
-                                                <i class="fa fa-envelope"></i> portharcourt@studentenergy.org
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 animate" data-animate="fadeInUp">
-                                        <form id="ajax-contact" method="post" action="#">
-                                            <div class="input-field">
-                                                <input type="text" class="form-control" name="name" id="name" required placeholder="Name">
-                                            </div>
-                                            <div class="input-field">
-                                                <input type="email" class="form-control" name="email" id="email" required placeholder="Email">
-                                            </div>
-                                            <div class="input-field">
-                                                <textarea class="form-control" name="message" id="message" required placeholder="Message"></textarea>
-                                            </div>
-                                            <button class="btn" type="submit">Submit</button>
-                                        </form>
-                                        <div id="form-messages" class="mt-3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 		
 {% endblock %}
